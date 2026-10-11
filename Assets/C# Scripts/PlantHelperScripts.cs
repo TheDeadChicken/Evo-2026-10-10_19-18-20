@@ -127,6 +127,62 @@ public class PlantHelperScripts {
         triangles.Add(indexThree);
     }
 
+    public void ExtrudeRandomTriangle(List<int> triangles, List<Vector3> points, float length) {
+        int randomPoint = Random.Range(0, triangles.Count);
+        int randomStartPoint = randomPoint - (randomPoint % 3);
+
+        int indexZero = triangles[randomStartPoint];
+        int indexOne = triangles[randomStartPoint + 1];
+        int indexTwo = triangles[randomStartPoint + 2];
+
+        Vector3 p0 = points[indexZero];
+        Vector3 p1 = points[indexOne];
+        Vector3 p2 = points[indexTwo];
+
+        Vector3 normal = Vector3.Cross(p1-p0, p2-p0).normalized;
+
+        Vector3 p3 = p0 + normal * length;
+        Vector3 p4 = p1 + normal * length;
+        Vector3 p5 = p2 + normal * length;
+
+        points.Add(p3);
+        points.Add(p4);
+        points.Add(p5);
+
+        int indexThree = points.Count - 3;
+        int indexFour = points.Count - 2;
+        int indexFive = points.Count - 1;
+
+        triangles.Add(indexZero);
+        triangles.Add(indexOne);
+        triangles.Add(indexThree);
+
+        triangles.Add(indexOne);
+        triangles.Add(indexFour);
+        triangles.Add(indexThree);
+
+        triangles.Add(indexOne);
+        triangles.Add(indexTwo);
+        triangles.Add(indexFour);
+
+        triangles.Add(indexTwo);
+        triangles.Add(indexFive);
+        triangles.Add(indexFour);
+
+        triangles.Add(indexTwo);
+        triangles.Add(indexZero);
+        triangles.Add(indexThree);
+
+        triangles.Add(indexTwo);
+        triangles.Add(indexThree);
+        triangles.Add(indexFive);
+
+        triangles[randomStartPoint] = indexThree;
+        triangles[randomStartPoint + 1] = indexFour;
+        triangles[randomStartPoint + 2] = indexFive;
+        
+        Debug.Log("Extruded triangle at indices: " + indexZero + ", " + indexOne + ", " + indexTwo);
+    }
     // public float DistanceBetweenPoints(Vector3 pos1, Vector3 pos2) {
     //     return (Mathf.Sqrt(
     //         (pos2.x-pos1.x)*(pos2.x-pos1.x) +

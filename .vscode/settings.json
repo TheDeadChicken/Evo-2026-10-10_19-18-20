@@ -67,5 +67,13 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Evo.slnx"
+    "dotnet.defaultSolution": "Evo.slnx",
+    "dotnet.copilot.enableDotnetSkills": false,
+    "github.copilot.chat.agent.autoFix": false,
+    "github.copilot.chat.codeGeneration.useInstructionFiles": false,
+    "github.copilot.chat.agent.currentEditorContext.enabled": false,
+    "github.copilot.chat.customInstructionsInSystemMessage": false,
+    "github.copilot.chat.useProjectTemplates": false,
+    "github.copilot.editor.enableCodeActions": false,
+    "github.copilot.nextEditSuggestions.enabled": false
 }

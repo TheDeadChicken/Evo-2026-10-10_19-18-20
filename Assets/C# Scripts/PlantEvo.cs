@@ -120,11 +120,15 @@ public class PlantEvo : MonoBehaviour{
     }
 
     private bool Evolve(List<int> triangles, List<Vector3> points, float centerOffset) {
-        if (Random.Range(0, 5) == 0) {
+        if (Random.Range(0, 50) == 0) {
             int action = Random.Range(0, 50);
-            phs.SplitRandomTriangle(triangles, points, centerOffset);
+            if(action < 5) {
+                phs.SplitRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * centerOffset);
+            } else {
+                phs.ExtrudeRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * centerOffset);
+            }
             return true;
-        }
+        } 
         return false;
     }
 
