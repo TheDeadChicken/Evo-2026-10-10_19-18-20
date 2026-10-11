@@ -187,7 +187,7 @@ public class PlantEvo : MonoBehaviour{
         Vector3 p1 = points[indexOne];
         Vector3 p2 = points[indexTwo];
 
-        Vector3 pointThree = GetOutwardPoint(centerOffset, p0, p1, p2);
+        Vector3 pointThree = GetCenterPoint(centerOffset, p0, p1, p2);
 
         int indexThree = points.Count;
         points.Add(pointThree);
