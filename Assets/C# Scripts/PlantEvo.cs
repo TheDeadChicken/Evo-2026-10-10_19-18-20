@@ -12,7 +12,7 @@ public class PlantEvo : MonoBehaviour{
     [SerializeField] private List<int> triangles = new List<int>();
     [SerializeField] private float scale;
     [SerializeField] private float mergeScale;
-
+ 
     private void Awake() {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
