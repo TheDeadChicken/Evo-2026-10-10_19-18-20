@@ -183,6 +183,10 @@ public class PlantHelperScripts {
         
         Debug.Log("Extruded triangle at indices: " + indexZero + ", " + indexOne + ", " + indexTwo);
     }
+
+    public void MoveRandomPoint(List<Vector3> points, float offset ) {
+        points[Random.Range(0, points.Count)] += new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), Random.Range(-offset, offset));
+    }
     // public float DistanceBetweenPoints(Vector3 pos1, Vector3 pos2) {
     //     return (Mathf.Sqrt(
     //         (pos2.x-pos1.x)*(pos2.x-pos1.x) +

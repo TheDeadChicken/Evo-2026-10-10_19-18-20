@@ -12,7 +12,9 @@ public class PlantEvo : MonoBehaviour{
     [SerializeField] private List<int> triangles = new List<int>();
     [SerializeField] private float scale;
     [SerializeField] private float mergeScale;
- 
+    [SerializeField] private float splitLength;
+    [SerializeField] private float extruedLength;
+    [SerializeField] private float moveLength; 
     private void Awake() {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
@@ -32,7 +34,7 @@ public class PlantEvo : MonoBehaviour{
     }
 
     private void Update() {
-        if (Evolve(triangles, points, scale)) {
+        if (Evolve(triangles, points, splitLength, extruedLength, moveLength)) {
             MergeClosePoints(triangles, points, mergeScale);
             UpdateMesh();
         }
@@ -119,13 +121,15 @@ public class PlantEvo : MonoBehaviour{
         triangles.AddRange(newTris);
     }
 
-    private bool Evolve(List<int> triangles, List<Vector3> points, float centerOffset) {
+    private bool Evolve(List<int> triangles, List<Vector3> points, float splitLength, float extruedLength, float moveLength) {
         if (Random.Range(0, 50) == 0) {
-            int action = Random.Range(0, 50);
+            int action = Random.Range(16, 50);
             if(action < 5) {
-                phs.SplitRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * centerOffset);
+                phs.SplitRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * splitLength);
+            } else if (action < 15) {
+                phs.ExtrudeRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * extruedLength);
             } else {
-                phs.ExtrudeRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * centerOffset);
+                phs.MoveRandomPoint(points, moveLength);
             }
             return true;
         } 

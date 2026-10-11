@@ -830,7 +830,10 @@ MonoBehaviour:
   points: []
   triangles: 
   scale: 3
-  mergeScale: 1.5
+  mergeScale: 0.5
+  splitLength: 1
+  extruedLength: 1
+  moveLength: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
