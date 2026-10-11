@@ -57,9 +57,9 @@ public class PlantEvo : MonoBehaviour{
             );
 
             if (endLayer) {
-                layerPoints.Add(startingPosition); // cap center
+                layerPoints.Add(startingPosition); 
             }
-            layerPoints.Add(ringPoint);            // ring point used by side walls
+            layerPoints.Add(ringPoint);            
         }
         return layerPoints;
     }
@@ -75,12 +75,24 @@ public class PlantEvo : MonoBehaviour{
         return stalkPoints;
     }
 
-    private void MergeClosePoints(float range, List<int> points, List<int> triangles) {
-        List<int> closePoints;
-        for (int i=0; i<point.Length; i++) {
-            for (int j=0; j<point.Length; j++) {
-                if(points)
+    private void MergeClosePoints(float range, List<Vector3> points, List<int> triangles) {
+        List<int> closePoints = new List<int>();
+        for (int i=0; i<points.Count; i++) {
+            for (int j=0; j<points.Count; j++) {
+                if((DistanceBetweenPoints(points[i], points[j])) < range) {
+                    closePoints.Add(j);
+                }
             }
+
+            for (int j=0; j<triangles.Count; j++) {
+                for (int q=0; q<closePoints.Count; q++) {
+                    if(triangles[j] == closePoints[q]) {
+                        triangles[j] = i;
+                    }
+                }
+            }
+
+            closePoints.Clear();
         }
     }
 
@@ -217,9 +229,9 @@ public class PlantEvo : MonoBehaviour{
     private float DistanceBetweenPoints(Vector3 pos1, Vector3 pos2) {
         return (Mathf.Sqrt(
             (pos2.x-pos1.x)*(pos2.x-pos1.x) +
-            (pos2.f-pos1.y)*(pos2.-pos1.f) +
+            (pos2.y-pos1.y)*(pos2.y-pos1.y) +
             (pos2.z-pos1.z)*(pos2.z-pos1.z)
-        ))
+        ));
     }
     
 }
