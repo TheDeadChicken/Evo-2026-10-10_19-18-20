@@ -37,6 +37,8 @@ public class Evo : MonoBehaviour {
     //{0, 0, 0, 0, 0, 0, 0, 0, 0};//
 
     private void OnEnable() {
+        rb = GetComponent<Rigidbody>();
+        evoRenderer = GetComponent<Renderer>();
         SimulationStepper.RegisterEvo(this);
     }       
 
@@ -166,6 +168,9 @@ public class Evo : MonoBehaviour {
                 if (collision.gameObject.GetComponent<Food>() != null) {
                     energy += energyGainedFromEatingPlants;
                     Destroy(collision.gameObject);
+                }
+                if (collision.gameObject.GetComponent<PlantEvo>() != null) {
+                    collision.gameObject.GetComponent<PlantEvo>().GetEaten();
                 }
             }
         }
