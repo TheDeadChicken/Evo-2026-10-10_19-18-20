@@ -72,7 +72,7 @@ public class HexPlacer : MonoBehaviour {
                         if(!isErase) {
                             if (!tileLocations.ContainsKey(objectPosition)) {
 
-                                GameObject newTile = Instantiate(placedObject.tile, objectPosition, Quaternion.identity);
+                                GameObject newTile = AddTile(objectPosition);
                                 tileLocations.Add(newTile.transform.position, newTile);
                             }
                         } else {
@@ -94,5 +94,19 @@ public class HexPlacer : MonoBehaviour {
             (distanceBetweenPoints)) * 
             (distanceBetweenPoints)) +
             (offset); 
+    }
+
+    public void ClearTiles() {
+    foreach (var tile in tileLocations.Values) {
+        if (tile != null) Destroy(tile);
+    }
+    tileLocations.Clear();
+}
+
+    public GameObject AddTile(Vector3 position) {
+        if (tileLocations.TryGetValue(position, out GameObject existing)) return existing;
+        GameObject newTile = Instantiate(placedObject.tile, position, Quaternion.identity);
+        tileLocations.Add(newTile.transform.position, newTile);
+        return newTile;
     }
 }
