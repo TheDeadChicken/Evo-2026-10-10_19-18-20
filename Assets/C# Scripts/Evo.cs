@@ -26,7 +26,7 @@ public class Evo : MonoBehaviour {
 
     private float metabolismSpeed;
     private Rigidbody rb;
-    private Renderer renderer;
+    private Renderer evoRenderer;
 
     private List<GameObject> family = new List<GameObject>();
 
@@ -85,13 +85,13 @@ public class Evo : MonoBehaviour {
         transform.localScale = new Vector3(mass, mass, mass);
 
         rb = GetComponent<Rigidbody>();
-        renderer = GetComponent<Renderer>();
+        evoRenderer = GetComponent<Renderer>();
 
         if(traits["Consumption"][0] == 1) {
-            renderer.material.color = Color.red;
+            evoRenderer.material.color = Color.red;
         } else {
             if(traits["Consumption"][0] == 0) {
-                renderer.material.color = lightBlue;
+                evoRenderer.material.color = lightBlue;
             }
         }
 
@@ -380,14 +380,14 @@ public class Evo : MonoBehaviour {
                 if (traits[trait][0] == 1) {
                     if (Random.Range(0, 4) == 0) {                        
                         traits[trait][0] = 0;
-                        renderer.material.color = Color.lightBlue;
+                        evoRenderer.material.color = Color.lightBlue;
                     } else {
                         traits[trait][1] += Random.Range(-1, 2);
                     }
 
                 } else {
                     traits[trait][0] = 1;
-                    renderer.material.color = Color.red;
+                    evoRenderer.material.color = Color.red;
 
                 }
             }

@@ -65,9 +65,9 @@ public class HexPlacer : MonoBehaviour {
                     Debug.Log(isErase);
                     
                 }
-                if(isErase == null) {
-                    Debug.LogError("Oh No, the erase mode is not set");
-                }
+                //if(isErase == null) {
+                    //Debug.LogError("Oh No, the erase mode is not set");
+                //}
                 if(Mouse.current.leftButton.isPressed) {
                         if(!isErase) {
                             if (!tileLocations.ContainsKey(objectPosition)) {

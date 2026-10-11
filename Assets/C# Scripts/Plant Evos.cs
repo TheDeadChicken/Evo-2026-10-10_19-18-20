@@ -82,7 +82,7 @@ public class PlantEvos : MonoBehaviour {
         Vector3 centroid = (p0 + p1 + p2) / 3f;
         Vector3 faceNormal = Vector3.Cross(p1 - p0, p2 - p0).normalized;
         
-        return centroid + (faceNormal * Random.Range(centerOffset * 0.1f, centerOffset * 0.5f));
+        return centroid + (faceNormal * Random.Range(-0.5f,  0.5f) * centerOffset);
     }
 
     private void SplitRandomTriangle(List<int> triangles, List<Vector3> points, float centerOffset) {
