@@ -156,7 +156,7 @@ MonoBehaviour:
   lightBlue: {r: 0, g: 1, b: 0.88235295, a: 1}
   energyLostPerSecond: 2
   energyForCreation: 30
-  energyGainedFromEatingPlants: 30
+  energyGainedFromEatingPlants: 1
   sightMask:
     serializedVersion: 2
     m_Bits: 1024

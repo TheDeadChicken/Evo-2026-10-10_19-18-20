@@ -67,11 +67,11 @@ public class PlantEvo : MonoBehaviour{
 
    
     private bool Evolve(List<int> triangles, List<Vector3> points, float splitLength, float extruedLength, float moveLength) {
-        if (Random.Range(0, 50) == 0) {
-            int action = Random.Range(0, 50);
-            if(action < 2) {
+        if (Random.Range(0, 25000) == 0) {
+            int action = Random.Range(0, 500);
+            if(action < 1) {
                 phs.SplitRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * splitLength);
-            } else if (action < 7) {
+            } else if (action < 3) {
                 phs.ExtrudeRandomTriangle(triangles, points, Random.Range(0.1f, 1f) * extruedLength);
             } else {
                 phs.MoveRandomPoint(points, moveLength);

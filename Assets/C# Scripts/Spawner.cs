@@ -37,38 +37,39 @@ public class Spawner : MonoBehaviour {
         Main.instance.OnSetupStart -= SetupEvo;
     }
     
-    private void Update() {
-        if(!Main.instance.inEditMode) {
-            // for (int i=0; i<Main.instance.speedFactor; i++) {
-            //     time += Time.deltaTime; 
+    // private void Update() {
+    //     if(!Main.instance.inEditMode) {
+    //         // for (int i=0; i<Main.instance.speedFactor; i++) {
+    //         //     time += Time.deltaTime; 
 
-            //     spawnTime += Time.deltaTime;
-            //     if ((Mathf.Round(spawnTime % 2)) == 0) {
-            //         SpawnFood();
-            //         spawnTime += 0.5f;
-            //     }
-            // }
+    //         //     spawnTime += Time.deltaTime;
+    //         //     if ((Mathf.Round(spawnTime % 2)) == 0) {
+    //         //         SpawnFood();
+    //         //         spawnTime += 0.5f;
+    //         //     }
+    //         // }
 
-            // for (int i=0; i<HexPlacer.instance.tileLocations.Count/3; i++) {
-            //     if (Random.Range(0, 5000) == 0) {
-            //         SpawnFood();
-            //         Debug.Log("spawned");
-            //     }
-            // }
-        }
-    }
+    //         // for (int i=0; i<HexPlacer.instance.tileLocations.Count/3; i++) {
+    //         //     if (Random.Range(0, 5000) == 0) {
+    //         //         SpawnFood();
+    //         //         Debug.Log("spawned");
+    //         //     }
+    //         // }
+    //     }
+    // }
 
     private void SpawnFood() {
         Instantiate(food, Main.instance.GetRandomMapLocation(), Quaternion.identity, foodParent.transform);   
     }
 
     private void SetupFood() {
-        for (int i=0; i<HexPlacer.instance.tileLocations.Count; i++) {
+        for (int i=0; i<HexPlacer.instance.tileLocations.Count/10; i++) {
             SpawnFood();
         }
     }
 
     private void SetupEvo() {
+
         for (int i=0; i<HexPlacer.instance.tileLocations.Count/11; i++) {
             SpawnEvo();
         }
@@ -81,12 +82,12 @@ public class Spawner : MonoBehaviour {
     }
 
     public void SimTick() {
-        for (int i=0; i<HexPlacer.instance.tileLocations.Count/3; i++) {
-            if (Random.Range(0, 5000) == 0) {
-                SpawnFood();
-                Debug.Log("spawned");
-            }
-        }
+        // for (int i=0; i<HexPlacer.instance.tileLocations.Count/3; i++) {
+        //     if (Random.Range(0, 5000) == 0) {
+        //         SpawnFood();
+        //         Debug.Log("spawned");
+        //     }
+        // }
     }
 
 
