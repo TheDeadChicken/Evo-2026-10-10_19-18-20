@@ -187,6 +187,81 @@ public class PlantHelperScripts {
     public void MoveRandomPoint(List<Vector3> points, float offset ) {
         points[Random.Range(0, points.Count)] += new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), Random.Range(-offset, offset));
     }
+
+
+    public List<Vector3> CreatePlantLayer(int amountOfPoints, float radius, Vector3 startingPosition, float rotationalOffset, bool endLayer) {
+        List<Vector3> layerPoints = new List<Vector3>();
+
+        for (int i = 0; i < amountOfPoints; i++) {
+            float angle = ((float)i / amountOfPoints) * 2f * Mathf.PI + rotationalOffset;
+            Vector3 ringPoint = new Vector3(
+                startingPosition.x + Mathf.Cos(angle) * radius,
+                startingPosition.y,
+                startingPosition.z + Mathf.Sin(angle) * radius
+            );
+
+            if (endLayer) {
+                layerPoints.Add(startingPosition); 
+            }
+            layerPoints.Add(ringPoint);            
+        }
+        return layerPoints;
+    }
+
+    public List<Vector3> CreateStalk(int amountOfLayers, float spaceBetweenLayers, int pointsPerLayer, float layerRadius, Vector3 startingPosition, float rotationalOffset) {
+        List<Vector3> stalkPoints = new List<Vector3>();
+
+        for (int i = 0; i < amountOfLayers; i++) {
+            float offset = rotationalOffset + (Mathf.PI / pointsPerLayer) * (i % 2);
+            Vector3 layerPos = startingPosition + Vector3.up * (i * spaceBetweenLayers);
+            stalkPoints.AddRange(CreatePlantLayer(pointsPerLayer, layerRadius, layerPos, offset, (i == 0 || i == (amountOfLayers - 1))));
+        }
+        return stalkPoints;
+    }
+
+    public void MergeClosePoints(List<int> triangles, List<Vector3> points, float range) {
+        int count = points.Count;
+        float sqrRange = range * range;
+
+        int[] remap = new int[count];
+        for (int i = 0; i < count; i++) remap[i] = -1;
+
+        for (int i = 0; i < count; i++) {
+            if (remap[i] != -1) continue;   
+            remap[i] = i;                   
+            for (int j = i + 1; j < count; j++) {
+                if (remap[j] == -1 && (points[i] - points[j]).sqrMagnitude < sqrRange) {
+                    remap[j] = i;
+                }
+            }
+        }
+
+        int[] newIndex = new int[count];
+        List<Vector3> newPoints = new List<Vector3>();
+        for (int i = 0; i < count; i++) {
+            if (remap[i] == i) {
+                newIndex[i] = newPoints.Count;
+                newPoints.Add(points[i]);
+            }
+        }
+
+        List<int> newTris = new List<int>(triangles.Count);
+        for (int t = 0; t < triangles.Count; t += 3) {
+            int a = newIndex[remap[triangles[t]]];
+            int b = newIndex[remap[triangles[t + 1]]];
+            int c = newIndex[remap[triangles[t + 2]]];
+            if (a == b || b == c || a == c) continue;
+            newTris.Add(a);
+            newTris.Add(b);
+            newTris.Add(c);
+        }
+
+        points.Clear();
+        points.AddRange(newPoints);
+        triangles.Clear();
+        triangles.AddRange(newTris);
+    }
+
     // public float DistanceBetweenPoints(Vector3 pos1, Vector3 pos2) {
     //     return (Mathf.Sqrt(
     //         (pos2.x-pos1.x)*(pos2.x-pos1.x) +
