@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f95306b7aa94782ad76cdfe7362c1f, type: 3}
+  m_Name: BaseTile
+  m_EditorClassIdentifier: Assembly-CSharp::Tiles
+  tileHologram: {fileID: 3523184261257919410, guid: a4c667bc581a64227b5a4cf9e9c70a74, type: 3}
+  tile: {fileID: 5795913469373410020, guid: 617c7f1bac71947f7b38aab756f3ee49, type: 3}
