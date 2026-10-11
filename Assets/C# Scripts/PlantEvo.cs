@@ -11,7 +11,7 @@ public class PlantEvo : MonoBehaviour{
     [SerializeField] private List<Vector3> points = new List<Vector3>();
     [SerializeField] private List<int> triangles = new List<int>();
     [SerializeField] private float scale;
-    [SerializeField] private float mergeScale = 0.2f;
+    [SerializeField] private float mergeScale;
 
     private void Awake() {
         mesh = new Mesh();
@@ -33,6 +33,7 @@ public class PlantEvo : MonoBehaviour{
 
     private void Update() {
         if (Evolve(triangles, points, scale)) {
+            MergeClosePoints(triangles, points, mergeScale);
             UpdateMesh();
         }
     }
@@ -75,31 +76,53 @@ public class PlantEvo : MonoBehaviour{
         return stalkPoints;
     }
 
-    private void MergeClosePoints(float range, List<Vector3> points, List<int> triangles) {
-        List<int> closePoints = new List<int>();
-        for (int i=0; i<points.Count; i++) {
-            for (int j=0; j<points.Count; j++) {
-                if(phs.DistanceBetweenPoints(points[i], points[j]) < range) {
-                    closePoints.Add(j);
+    private void MergeClosePoints(List<int> triangles, List<Vector3> points, float range) {
+        int count = points.Count;
+        float sqrRange = range * range;
+
+        int[] remap = new int[count];
+        for (int i = 0; i < count; i++) remap[i] = -1;
+
+        for (int i = 0; i < count; i++) {
+            if (remap[i] != -1) continue;   
+            remap[i] = i;                   
+            for (int j = i + 1; j < count; j++) {
+                if (remap[j] == -1 && (points[i] - points[j]).sqrMagnitude < sqrRange) {
+                    remap[j] = i;
                 }
             }
-
-            for (int j=0; j<triangles.Count; j++) {
-                for (int q=0; q<closePoints.Count; q++) {
-                    if(triangles[j] == closePoints[q]) {
-                        triangles[j] = i;
-                    }
-                }
-            }
-
-            closePoints.Clear();
         }
+
+        int[] newIndex = new int[count];
+        List<Vector3> newPoints = new List<Vector3>();
+        for (int i = 0; i < count; i++) {
+            if (remap[i] == i) {
+                newIndex[i] = newPoints.Count;
+                newPoints.Add(points[i]);
+            }
+        }
+
+        List<int> newTris = new List<int>(triangles.Count);
+        for (int t = 0; t < triangles.Count; t += 3) {
+            int a = newIndex[remap[triangles[t]]];
+            int b = newIndex[remap[triangles[t + 1]]];
+            int c = newIndex[remap[triangles[t + 2]]];
+            if (a == b || b == c || a == c) continue;
+            newTris.Add(a);
+            newTris.Add(b);
+            newTris.Add(c);
+        }
+
+        points.Clear();
+        points.AddRange(newPoints);
+        triangles.Clear();
+        triangles.AddRange(newTris);
     }
 
     private bool Evolve(List<int> triangles, List<Vector3> points, float centerOffset) {
-        if (Random.Range(0, 50) == 0) {
+        if (Random.Range(0, 5) == 0) {
             int action = Random.Range(0, 50);
-            phs.SplitRandomTriangle(triangles, points, 1f);
+            phs.SplitRandomTriangle(triangles, points, centerOffset);
             return true;
         }
         return false;

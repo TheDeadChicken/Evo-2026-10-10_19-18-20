@@ -425,7 +425,6 @@ GameObject:
   - component: {fileID: 688177806}
   - component: {fileID: 688177807}
   - component: {fileID: 688177808}
-  - component: {fileID: 688177809}
   - component: {fileID: 688177810}
   - component: {fileID: 688177811}
   - component: {fileID: 688177812}
@@ -485,18 +484,6 @@ MonoBehaviour:
   camera: {fileID: 330585545}
   dropdown: {fileID: 1177007645445352738, guid: 77c752ace86204831bbf28de1bb9c2c1, type: 3}
   parent: {fileID: 0}
---- !u!114 &688177809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 688177805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f95445b9ccb1d4b23862c62901cb6c9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &688177810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,8 +829,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlantEvo
   points: []
   triangles: 
-  scale: 8
-  mergeScale: 0.2
+  scale: 3
+  mergeScale: 0.02
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

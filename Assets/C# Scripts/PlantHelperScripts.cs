@@ -127,11 +127,11 @@ public class PlantHelperScripts {
         triangles.Add(indexThree);
     }
 
-    public float DistanceBetweenPoints(Vector3 pos1, Vector3 pos2) {
-        return (Mathf.Sqrt(
-            (pos2.x-pos1.x)*(pos2.x-pos1.x) +
-            (pos2.y-pos1.y)*(pos2.y-pos1.y) +
-            (pos2.z-pos1.z)*(pos2.z-pos1.z)
-        ));
-    }
+    // public float DistanceBetweenPoints(Vector3 pos1, Vector3 pos2) {
+    //     return (Mathf.Sqrt(
+    //         (pos2.x-pos1.x)*(pos2.x-pos1.x) +
+    //         (pos2.y-pos1.y)*(pos2.y-pos1.y) +
+    //         (pos2.z-pos1.z)*(pos2.z-pos1.z)
+    //     ));
+    // }
 }
