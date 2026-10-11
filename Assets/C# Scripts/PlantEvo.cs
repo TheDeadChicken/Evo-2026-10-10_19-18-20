@@ -22,7 +22,7 @@ public class PlantEvo : MonoBehaviour{
         triangles.Clear();
 
         int layers = Random.Range(7, 15);
-        int pointsPerLayer = 6;
+        int pointsPerLayer = Random.Range(6, 15);
 
         points.AddRange(CreateStalk(layers, Random.Range(0.1f, 1f) * scale, pointsPerLayer, Random.Range(0.5f, 3f) * scale, Vector3.zero, 0f));
         triangles.AddRange(ConnectLayers(layers, pointsPerLayer));
@@ -75,6 +75,15 @@ public class PlantEvo : MonoBehaviour{
         return stalkPoints;
     }
 
+    private void MergeClosePoints(float range, List<int> points, List<int> triangles) {
+        List<int> closePoints;
+        for (int i=0; i<point.Length; i++) {
+            for (int j=0; j<point.Length; j++) {
+                if(points)
+            }
+        }
+    }
+
     private bool Evolve(List<int> triangles, List<Vector3> points, float centerOffset) {
         if (Random.Range(0, 5) == 0) {
             int action = Random.Range(0, 50);
@@ -83,28 +92,28 @@ public class PlantEvo : MonoBehaviour{
         return false;
     }
 
-    private int GetLayerStart(int layer, int pointsPerLayer) {
-        return (layer == 0) ? 0 : (layer + 2) * pointsPerLayer;
-    }
-
     private bool IsEndLayer(int layer, int amountOfLayers) {
         return (layer == 0 || layer == amountOfLayers - 1);
     }
 
+    private int GetLayerStart(int layer, int pointsPerLayer) {
+        return (layer == 0) ? 0 : (layer + 1) * pointsPerLayer;
+    }   
+
     private int GetRingIndex(int layer, int j, int pointsPerLayer, int amountOfLayers) {
         int start = GetLayerStart(layer, pointsPerLayer);
-        if(IsEndLayer(layer, amountOfLayers)) {
-            return start + (j * 3) + 2;
+        if (IsEndLayer(layer, amountOfLayers)) {
+            return start + (j * 2) + 1;
         }
         return start + j;
     }
-    
+
     private int GetCapRingIndex(int layer, int j, int pointsPerLayer) {
-        return GetLayerStart(layer, pointsPerLayer) + (j * 3) + 1;
+        return GetLayerStart(layer, pointsPerLayer) + (j * 2) + 1;
     }
 
     private int GetCenterIndex(int layer, int j, int pointsPerLayer) {
-        return GetLayerStart(layer, pointsPerLayer) + (j * 3);
+        return GetLayerStart(layer, pointsPerLayer) + (j * 2);
     }
 
     private List<int> ConnectLayers(int amoutOfLayers, int pointsPerLayer) {
@@ -203,6 +212,14 @@ public class PlantEvo : MonoBehaviour{
         triangles.Add(indexTwo);
         triangles.Add(indexZero);
         triangles.Add(indexThree);
+    }
+
+    private float DistanceBetweenPoints(Vector3 pos1, Vector3 pos2) {
+        return (Mathf.Sqrt(
+            (pos2.x-pos1.x)*(pos2.x-pos1.x) +
+            (pos2.f-pos1.y)*(pos2.-pos1.f) +
+            (pos2.z-pos1.z)*(pos2.z-pos1.z)
+        ))
     }
     
 }
