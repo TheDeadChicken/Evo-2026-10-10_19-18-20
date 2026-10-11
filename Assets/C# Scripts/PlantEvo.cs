@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,11 +6,11 @@ using System.Collections.Generic;
 public class PlantEvo : MonoBehaviour{
 
     private Mesh mesh;
-    private static PlantHelperScripts phs;
+    private static PlantHelperScripts phs = new PlantHelperScripts();
 
     [SerializeField] private List<Vector3> points = new List<Vector3>();
     [SerializeField] private List<int> triangles = new List<int>();
-    [SerializeField] private float scale = 8f;
+    [SerializeField] private float scale;
     [SerializeField] private float mergeScale = 0.2f;
 
     private void Awake() {
@@ -79,7 +79,7 @@ public class PlantEvo : MonoBehaviour{
         List<int> closePoints = new List<int>();
         for (int i=0; i<points.Count; i++) {
             for (int j=0; j<points.Count; j++) {
-                if((phs.DistanceBetweenPoints(points[i], points[j])) < range) {
+                if(phs.DistanceBetweenPoints(points[i], points[j]) < range) {
                     closePoints.Add(j);
                 }
             }
@@ -97,8 +97,9 @@ public class PlantEvo : MonoBehaviour{
     }
 
     private bool Evolve(List<int> triangles, List<Vector3> points, float centerOffset) {
-        if (Random.Range(0, 5) == 0) {
+        if (Random.Range(0, 50) == 0) {
             int action = Random.Range(0, 50);
+            phs.SplitRandomTriangle(triangles, points, 1f);
             return true;
         }
         return false;

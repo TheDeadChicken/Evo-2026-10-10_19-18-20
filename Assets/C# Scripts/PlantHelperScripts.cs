@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class PlantHelperScripts {
     
     private bool IsEndLayer(int layer, int amountOfLayers) {
-        return (layer == 0 || layer == amountOfLayers - 1);
+        return layer == 0 || layer == amountOfLayers - 1;
     }
 
     private int GetLayerStart(int layer, int pointsPerLayer) {
@@ -96,7 +96,7 @@ public class PlantHelperScripts {
         return centroid + (faceNormal * Random.Range(-0.5f,  0.5f) * centerOffset);
     }
 
-    private void SplitRandomTriangle(List<int> triangles, List<Vector3> points, float centerOffset) {
+    public void SplitRandomTriangle(List<int> triangles, List<Vector3> points, float centerOffset) {
 
         int randomPoint = Random.Range(0, triangles.Count);
         int randomStartPoint = randomPoint - (randomPoint % 3);
