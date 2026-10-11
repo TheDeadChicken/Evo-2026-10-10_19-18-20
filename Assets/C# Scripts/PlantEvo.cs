@@ -74,6 +74,14 @@ public class PlantEvo {
         return stalkPoints;
     }
 
+    private bool Evolve(List<int> triangles, List<Vector3> points, float centerOffset) {
+        if (Random.Range(0, 5) == 0) {
+            int action = Random.Range(0, 50);
+            return true;
+        }
+        return false;
+    }
+
     private int GetLayerStart(int layer, int pointsPerLayer) {
         return (layer == 0) ? 0 : (layer + 2) * pointsPerLayer;
     }
