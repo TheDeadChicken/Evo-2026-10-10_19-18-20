@@ -21,8 +21,8 @@ public class LevelSaveSystem : MonoBehaviour {
     private void Update() {
         if (!Main.instance.inEditMode) return;
 
-        if (Keyboard.current.f5Key.wasPressedThisFrame) Save(levelName);
-        if (Keyboard.current.f9Key.wasPressedThisFrame) Load(levelName);
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) Save(levelName);
+        if (Keyboard.current.digit0Key.wasPressedThisFrame) Load(levelName);
     }
 
     public void Save(string name) {

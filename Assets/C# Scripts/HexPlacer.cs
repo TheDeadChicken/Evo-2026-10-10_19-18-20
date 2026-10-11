@@ -71,9 +71,9 @@ public class HexPlacer : MonoBehaviour {
                 if(Mouse.current.leftButton.isPressed) {
                         if(!isErase) {
                             if (!tileLocations.ContainsKey(objectPosition)) {
-
-                                GameObject newTile = AddTile(objectPosition);
-                                tileLocations.Add(newTile.transform.position, newTile);
+                                if (!tileLocations.ContainsKey(objectPosition)) {
+                                    AddTile(objectPosition);
+                                };
                             }
                         } else {
                             if(tileLocations.ContainsKey(objectPosition)) {
