@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 688177810}
   - component: {fileID: 688177811}
   - component: {fileID: 688177812}
+  - component: {fileID: 688177813}
   m_Layer: 0
   m_Name: MAIN
   m_TagString: Untagged
@@ -524,6 +525,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fa68eaa6be745dba911758bd06f67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimulationStepper
+--- !u!114 &688177813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688177805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9b0c14e2d69471894583555aee0975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSaveSystem
+  levelName: level1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

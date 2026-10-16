@@ -10,11 +10,14 @@ public class PlantEvo : MonoBehaviour{
     private MeshCollider meshCollider;
 
     private static PlantHelperScripts phs = new PlantHelperScripts();
+    private Dictionary<string, List<float>> traits = new Dictionary<string, List<float>>();
+
 
     [SerializeField] private GameObject energyUnit;
 
     [SerializeField] private List<Vector3> points = new List<Vector3>();
     [SerializeField] private List<int> triangles = new List<int>();
+    [SerializeField] private List<int> appliedTriangles = new List<int>();
     [SerializeField] private float scale;
     [SerializeField] private float mergeFraction;
     [SerializeField] private float splitLength;
@@ -24,6 +27,8 @@ public class PlantEvo : MonoBehaviour{
         mesh = new Mesh();
         mesh = GetComponent<MeshFilter>().mesh;
         meshCollider = GetComponent<MeshCollider>();
+
+        traits["EnergyReseptiveness"][0] = Random.Range(0f, 1.00f);
 
     }
 
@@ -63,6 +68,14 @@ public class PlantEvo : MonoBehaviour{
             Instantiate(energyUnit, points[i] += transform.position, Quaternion.identity);
         }
         Destroy(this.gameObject);   
+    }
+
+    private void GainEnergy() {
+        
+    }
+
+    private void Grow() {
+        
     }
 
    
